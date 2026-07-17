@@ -12,6 +12,7 @@ import useHotkey from "@/lib/hooks/use-hotkey"
 import { LLMID, MessageImage } from "@/types"
 import { useParams } from "next/navigation"
 import { FC, useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { ChatHelp } from "./chat-help"
 import { useScroll } from "./chat-hooks/use-scroll"
 import { ChatInput } from "./chat-input"
@@ -22,6 +23,8 @@ import { ChatSecondaryButtons } from "./chat-secondary-buttons"
 interface ChatUIProps {}
 
 export const ChatUI: FC<ChatUIProps> = ({}) => {
+  const { t } = useTranslation()
+
   useHotkey("o", () => handleNewChat())
 
   const params = useParams()
@@ -197,13 +200,13 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
         />
       </div>
 
-      <div className="absolute right-4 top-1 flex h-[40px] items-center space-x-2">
+      <div className="absolute right-14 top-1 flex h-[40px] items-center space-x-2">
         <ChatSecondaryButtons />
       </div>
 
       <div className="bg-secondary flex max-h-[50px] min-h-[50px] w-full items-center justify-center border-b-2 font-bold">
         <div className="max-w-[200px] truncate sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]">
-          {selectedChat?.name || "Chat"}
+          {selectedChat?.name || t("Chat")}
         </div>
       </div>
 

@@ -14,12 +14,15 @@ import { ChevronsUpDown } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { FC, useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 
 interface WorkspaceSwitcherProps {}
 
 export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
+  const { t } = useTranslation()
+
   useHotkey(";", () => setOpen(prevState => !prevState))
 
   const {
@@ -124,7 +127,7 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
             </div>
           )}
 
-          {getWorkspaceName(value) || "Select workspace..."}
+          {getWorkspaceName(value) || t("Select workspace...")}
         </div>
 
         <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
@@ -138,11 +141,11 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
             onClick={handleCreateWorkspace}
           >
             <IconPlus />
-            <div className="ml-2">New Workspace</div>
+            <div className="ml-2">{t("New Workspace")}</div>
           </Button>
 
           <Input
-            placeholder="Search workspaces..."
+            placeholder={t("Search workspaces...")}
             autoFocus
             value={search}
             onChange={e => setSearch(e.target.value)}
