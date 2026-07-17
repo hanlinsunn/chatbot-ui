@@ -8,6 +8,7 @@ import {
   CardTitle
 } from "@/components/ui/card"
 import { FC, useRef } from "react"
+import { useTranslation } from "react-i18next"
 
 export const SETUP_STEP_COUNT = 3
 
@@ -30,6 +31,8 @@ export const StepContainer: FC<StepContainerProps> = ({
   showBackButton = false,
   showNextButton = true
 }) => {
+  const { t } = useTranslation()
+
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -67,7 +70,7 @@ export const StepContainer: FC<StepContainerProps> = ({
               variant="outline"
               onClick={() => onShouldProceed(false)}
             >
-              Back
+              {t("Back")}
             </Button>
           )}
         </div>
@@ -79,7 +82,7 @@ export const StepContainer: FC<StepContainerProps> = ({
               size="sm"
               onClick={() => onShouldProceed(true)}
             >
-              Next
+              {t("Next")}
             </Button>
           )}
         </div>

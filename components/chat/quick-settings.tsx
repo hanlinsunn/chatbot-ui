@@ -217,13 +217,13 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
             ))}
 
           {loading ? (
-            <div className="animate-pulse">Loading assistant...</div>
+            <div className="animate-pulse">{t("Loading assistant...")}</div>
           ) : (
             <>
               <div className="overflow-hidden text-ellipsis">
                 {isModified &&
                   (selectedPreset || selectedAssistant) &&
-                  "Modified "}
+                  t("Modified ")}
 
                 {selectedPreset?.name ||
                   selectedAssistant?.name ||
@@ -241,13 +241,13 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
         align="start"
       >
         {presets.length === 0 && assistants.length === 0 ? (
-          <div className="p-8 text-center">No items found.</div>
+          <div className="p-8 text-center">{t("No items found.")}</div>
         ) : (
           <>
             <Input
               ref={inputRef}
               className="w-full"
-              placeholder="Search..."
+              placeholder={t("Search...")}
               value={search}
               onChange={e => setSearch(e.target.value)}
               onKeyDown={e => e.stopPropagation()}

@@ -11,6 +11,7 @@ import {
   IconLoader2
 } from "@tabler/icons-react"
 import { FC, useCallback, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { LimitDisplay } from "../ui/limit-display"
 import { toast } from "sonner"
 
@@ -31,6 +32,8 @@ export const ProfileStep: FC<ProfileStepProps> = ({
   onUsernameChange,
   onDisplayNameChange
 }) => {
+  const { t } = useTranslation()
+
   const [loading, setLoading] = useState(false)
 
   const debounce = (func: (...args: any[]) => void, wait: number) => {
@@ -91,13 +94,13 @@ export const ProfileStep: FC<ProfileStepProps> = ({
     <>
       <div className="space-y-1">
         <div className="flex items-center space-x-2">
-          <Label>Username</Label>
+          <Label>{t("Username")}</Label>
 
           <div className="text-xs">
             {usernameAvailable ? (
-              <div className="text-green-500">AVAILABLE</div>
+              <div className="text-green-500">{t("AVAILABLE")}</div>
             ) : (
-              <div className="text-red-500">UNAVAILABLE</div>
+              <div className="text-red-500">{t("UNAVAILABLE")}</div>
             )}
           </div>
         </div>
@@ -130,7 +133,7 @@ export const ProfileStep: FC<ProfileStepProps> = ({
       </div>
 
       <div className="space-y-1">
-        <Label>Chat Display Name</Label>
+        <Label>{t("Chat Display Name")}</Label>
 
         <Input
           placeholder="Your Name"

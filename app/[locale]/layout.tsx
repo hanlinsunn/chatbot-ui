@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner"
 import { GlobalState } from "@/components/utility/global-state"
+import { LanguageSwitcher } from "@/components/utility/language-switcher"
 import { Providers } from "@/components/utility/providers"
 import TranslationsProvider from "@/components/utility/translations-provider"
 import initTranslations from "@/lib/i18n"
@@ -87,7 +88,7 @@ export default async function RootLayout({
   const { t, resources } = await initTranslations(locale, i18nNamespaces)
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
         <Providers attribute="class" defaultTheme="dark">
           <TranslationsProvider
@@ -96,6 +97,7 @@ export default async function RootLayout({
             resources={resources}
           >
             <Toaster richColors position="top-center" duration={3000} />
+            <LanguageSwitcher />
             <div className="bg-background text-foreground flex h-dvh flex-col items-center overflow-x-auto">
               {session ? <GlobalState>{children}</GlobalState> : children}
             </div>

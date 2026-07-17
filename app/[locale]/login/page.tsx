@@ -2,6 +2,7 @@ import { Brand } from "@/components/ui/brand"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { SubmitButton } from "@/components/ui/submit-button"
+import initTranslations from "@/lib/i18n"
 import { createClient } from "@/lib/supabase/server"
 import { Database } from "@/supabase/types"
 import { createServerClient } from "@supabase/ssr"
@@ -15,10 +16,13 @@ export const metadata: Metadata = {
 }
 
 export default async function Login({
+  params: { locale },
   searchParams
 }: {
+  params: { locale: string }
   searchParams: { message: string }
 }) {
+  const { t } = await initTranslations(locale, ["translation"])
   const cookieStore = cookies()
   const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -170,7 +174,7 @@ export default async function Login({
         <Brand />
 
         <Label className="text-md mt-4" htmlFor="email">
-          Email
+          {t("Email")}
         </Label>
         <Input
           className="mb-3 rounded-md border bg-inherit px-4 py-2"
@@ -180,7 +184,7 @@ export default async function Login({
         />
 
         <Label className="text-md" htmlFor="password">
-          Password
+          {t("Password")}
         </Label>
         <Input
           className="mb-6 rounded-md border bg-inherit px-4 py-2"
@@ -190,23 +194,23 @@ export default async function Login({
         />
 
         <SubmitButton className="mb-2 rounded-md bg-blue-700 px-4 py-2 text-white">
-          Login
+          {t("Login")}
         </SubmitButton>
 
         <SubmitButton
           formAction={signUp}
           className="border-foreground/20 mb-2 rounded-md border px-4 py-2"
         >
-          Sign Up
+          {t("Sign Up")}
         </SubmitButton>
 
         <div className="text-muted-foreground mt-1 flex justify-center text-sm">
-          <span className="mr-1">Forgot your password?</span>
+          <span className="mr-1">{t("Forgot your password?")}</span>
           <button
             formAction={handleResetPassword}
             className="text-primary ml-1 underline hover:opacity-80"
           >
-            Reset
+            {t("Reset")}
           </button>
         </div>
 

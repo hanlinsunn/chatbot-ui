@@ -14,6 +14,7 @@ import { supabase } from "@/lib/supabase/browser-client"
 import { TablesUpdate } from "@/supabase/types"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { APIStep } from "../../../components/setup/api-step"
 import { FinishStep } from "../../../components/setup/finish-step"
 import { ProfileStep } from "../../../components/setup/profile-step"
@@ -23,6 +24,8 @@ import {
 } from "../../../components/setup/step-container"
 
 export default function SetupPage() {
+  const { t } = useTranslation()
+
   const {
     profile,
     setProfile,
@@ -161,9 +164,9 @@ export default function SetupPage() {
       case 1:
         return (
           <StepContainer
-            stepDescription="Let's create your profile."
+            stepDescription={t("Let's create your profile.")}
             stepNum={currentStep}
-            stepTitle="Welcome to Chatbot UI"
+            stepTitle={t("Welcome to Chatbot UI")}
             onShouldProceed={handleShouldProceed}
             showNextButton={!!(username && usernameAvailable)}
             showBackButton={false}
@@ -183,9 +186,11 @@ export default function SetupPage() {
       case 2:
         return (
           <StepContainer
-            stepDescription="Enter API keys for each service you'd like to use."
+            stepDescription={t(
+              "Enter API keys for each service you'd like to use."
+            )}
             stepNum={currentStep}
-            stepTitle="Set API Keys (optional)"
+            stepTitle={t("Set API Keys (optional)")}
             onShouldProceed={handleShouldProceed}
             showNextButton={true}
             showBackButton={true}
@@ -229,9 +234,9 @@ export default function SetupPage() {
       case 3:
         return (
           <StepContainer
-            stepDescription="You are all set up!"
+            stepDescription={t("You are all set up!")}
             stepNum={currentStep}
-            stepTitle="Setup Complete"
+            stepTitle={t("Setup Complete")}
             onShouldProceed={handleShouldProceed}
             showNextButton={true}
             showBackButton={true}

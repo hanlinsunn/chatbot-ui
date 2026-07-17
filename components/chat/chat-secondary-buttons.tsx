@@ -2,11 +2,14 @@ import { useChatHandler } from "@/components/chat/chat-hooks/use-chat-handler"
 import { ChatbotUIContext } from "@/context/context"
 import { IconInfoCircle, IconMessagePlus } from "@tabler/icons-react"
 import { FC, useContext } from "react"
+import { useTranslation } from "react-i18next"
 import { WithTooltip } from "../ui/with-tooltip"
 
 interface ChatSecondaryButtonsProps {}
 
 export const ChatSecondaryButtons: FC<ChatSecondaryButtonsProps> = ({}) => {
+  const { t } = useTranslation()
+
   const { selectedChat } = useContext(ChatbotUIContext)
 
   const { handleNewChat } = useChatHandler()
@@ -19,31 +22,40 @@ export const ChatSecondaryButtons: FC<ChatSecondaryButtonsProps> = ({}) => {
             delayDuration={200}
             display={
               <div>
-                <div className="text-xl font-bold">Chat Info</div>
+                <div className="text-xl font-bold">{t("Chat Info")}</div>
 
                 <div className="mx-auto mt-2 max-w-xs space-y-2 sm:max-w-sm md:max-w-md lg:max-w-lg">
-                  <div>Model: {selectedChat.model}</div>
-                  <div>Prompt: {selectedChat.prompt}</div>
-
-                  <div>Temperature: {selectedChat.temperature}</div>
-                  <div>Context Length: {selectedChat.context_length}</div>
+                  <div>
+                    {t("Model:")} {selectedChat.model}
+                  </div>
+                  <div>
+                    {t("Prompt:")} {selectedChat.prompt}
+                  </div>
 
                   <div>
-                    Profile Context:{" "}
+                    {t("Temperature:")} {selectedChat.temperature}
+                  </div>
+                  <div>
+                    {t("Context Length:")} {selectedChat.context_length}
+                  </div>
+
+                  <div>
+                    {t("Profile Context:")}{" "}
                     {selectedChat.include_profile_context
-                      ? "Enabled"
-                      : "Disabled"}
+                      ? t("Enabled")
+                      : t("Disabled")}
                   </div>
                   <div>
                     {" "}
-                    Workspace Instructions:{" "}
+                    {t("Workspace Instructions:")}{" "}
                     {selectedChat.include_workspace_instructions
-                      ? "Enabled"
-                      : "Disabled"}
+                      ? t("Enabled")
+                      : t("Disabled")}
                   </div>
 
                   <div>
-                    Embeddings Provider: {selectedChat.embeddings_provider}
+                    {t("Embeddings Provider:")}{" "}
+                    {selectedChat.embeddings_provider}
                   </div>
                 </div>
               </div>
@@ -60,7 +72,7 @@ export const ChatSecondaryButtons: FC<ChatSecondaryButtonsProps> = ({}) => {
 
           <WithTooltip
             delayDuration={200}
-            display={<div>Start a new chat</div>}
+            display={<div>{t("Start a new chat")}</div>}
             trigger={
               <div className="mt-1">
                 <IconMessagePlus
